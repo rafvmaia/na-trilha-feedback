@@ -15,8 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rota raiz de teste
 app.get('/', (req, res) => {
-  res.status(200).send('API Na Trilha Feedback está Online 🚀');
-});
+    res.status(200).send('API Na Trilha Feedback está Online 🚀');
+  });
+  
 
 // Rotas da API
 app.use('/api/feedbacks', feedbackRoutes);
