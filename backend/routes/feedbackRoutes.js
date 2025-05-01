@@ -1,6 +1,7 @@
 import express from 'express';
 import { submitFeedback, getAllFeedbacks, getFeedbackById } from '../controllers/feedbackController.js';
-import { verifyToken } from '../middlewares/authMiddleware.js';
+import verifyToken from '../middlewares/authMiddleware.js';
+
 
 const router = express.Router();
 

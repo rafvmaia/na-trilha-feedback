@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-export const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.authorization; // mais padrão
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-  const token = authHeader && authHeader.split(' ')[1]; // Espera formato: Bearer TOKEN
+  // Espera o formato: Bearer TOKEN
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
     return res.status(401).json({ message: 'Token não fornecido.' });
@@ -14,7 +15,9 @@ export const verifyToken = (req, res, next) => {
       return res.status(403).json({ message: 'Token inválido ou expirado.' });
     }
 
-    req.user = decoded; // Agora o req.user tem os dados do payload do JWT
+    req.user = decoded; // payload do token
     next();
   });
 };
+
+export default verifyToken;
