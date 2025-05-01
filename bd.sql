@@ -1,0 +1,225 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.17 (Homebrew)
+-- Dumped by pg_dump version 17.0
+
+-- Started on 2025-05-01 09:48:29 -03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: rafvmaia
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO rafvmaia;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 212 (class 1259 OID 16570)
+-- Name: feedbacks; Type: TABLE; Schema: public; Owner: rafvmaia
+--
+
+CREATE TABLE public.feedbacks (
+    id integer NOT NULL,
+    nome text,
+    email text NOT NULL,
+    conteudo_avaliacao text NOT NULL,
+    criticas text NOT NULL,
+    baixou_curriculo text,
+    tema_interesse text NOT NULL,
+    nota integer NOT NULL,
+    depoimento text,
+    mais_infos text,
+    data_envio timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.feedbacks OWNER TO rafvmaia;
+
+--
+-- TOC entry 211 (class 1259 OID 16569)
+-- Name: feedbacks_id_seq; Type: SEQUENCE; Schema: public; Owner: rafvmaia
+--
+
+CREATE SEQUENCE public.feedbacks_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.feedbacks_id_seq OWNER TO rafvmaia;
+
+--
+-- TOC entry 3693 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: feedbacks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rafvmaia
+--
+
+ALTER SEQUENCE public.feedbacks_id_seq OWNED BY public.feedbacks.id;
+
+
+--
+-- TOC entry 210 (class 1259 OID 16558)
+-- Name: users; Type: TABLE; Schema: public; Owner: rafvmaia
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    nome text NOT NULL,
+    email text NOT NULL,
+    senha text NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    criado_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.users OWNER TO rafvmaia;
+
+--
+-- TOC entry 209 (class 1259 OID 16557)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: rafvmaia
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.users_id_seq OWNER TO rafvmaia;
+
+--
+-- TOC entry 3694 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rafvmaia
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- TOC entry 3536 (class 2604 OID 16573)
+-- Name: feedbacks id; Type: DEFAULT; Schema: public; Owner: rafvmaia
+--
+
+ALTER TABLE ONLY public.feedbacks ALTER COLUMN id SET DEFAULT nextval('public.feedbacks_id_seq'::regclass);
+
+
+--
+-- TOC entry 3533 (class 2604 OID 16561)
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: rafvmaia
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- TOC entry 3686 (class 0 OID 16570)
+-- Dependencies: 212
+-- Data for Name: feedbacks; Type: TABLE DATA; Schema: public; Owner: rafvmaia
+--
+
+COPY public.feedbacks (id, nome, email, conteudo_avaliacao, criticas, baixou_curriculo, tema_interesse, nota, depoimento, mais_infos, data_envio) FROM stdin;
+1	Rafael Valença	rafael@example.com	Gostei muito da edição!	Nenhuma crítica.	https://linkedin.com/rafael	Frontend	5	A newsletter é incrível!	Espero novas edições.	2025-04-28 10:04:58.930494
+2	rafael	rafvmaia@gmail.com	bom	sim	https://www.linkedin.com/feed/	nao sei	5	nao	nao	2025-04-28 14:38:45.143165
+3	Rafa	teste@gmail.com	teste	teste	https://app.markup.io/w/RJUUcYws/f/c3527e41-f3fa-4e39-98dc-98db114f1730	teste	3	teste	teste	2025-04-29 11:29:59.812472
+\.
+
+
+--
+-- TOC entry 3684 (class 0 OID 16558)
+-- Dependencies: 210
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: rafvmaia
+--
+
+COPY public.users (id, nome, email, senha, created_at, criado_at) FROM stdin;
+1	Rafael Valença	rafvmaia@gmail.com	$2b$10$o4wcxbOMTSf30CPv5jUFNOVf8kKqXvPZ/T9P29XUZhEo83k5pwd82	2025-04-28 16:48:47.558084	2025-04-28 16:48:47.558084
+\.
+
+
+--
+-- TOC entry 3695 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: feedbacks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rafvmaia
+--
+
+SELECT pg_catalog.setval('public.feedbacks_id_seq', 3, true);
+
+
+--
+-- TOC entry 3696 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rafvmaia
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- TOC entry 3543 (class 2606 OID 16578)
+-- Name: feedbacks feedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: rafvmaia
+--
+
+ALTER TABLE ONLY public.feedbacks
+    ADD CONSTRAINT feedbacks_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3539 (class 2606 OID 16568)
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: rafvmaia
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 3541 (class 2606 OID 16566)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: rafvmaia
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3692 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: rafvmaia
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2025-05-01 09:48:29 -03
+
+--
+-- PostgreSQL database dump complete
+--
+
