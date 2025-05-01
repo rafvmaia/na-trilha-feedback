@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { findUserByEmail, createUser } from '../models/userModel.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
+
 
 // Função de login
 export const loginUser = async (req, res) => {
